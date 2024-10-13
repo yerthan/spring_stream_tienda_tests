@@ -24,21 +24,13 @@ class TiendaApplicationTests {
 	TransactionTemplate transactionTemplate;
 
 	List<Fabricante> findAllFabs() {
-		return transactionTemplate.execute(status -> {
 			var fabs = fabRepo.findAll();
-			//Si no utilizas fetch EAGER debes inicializar la colección LAZY en la transaccion:
-			//Para inicializar la coleccion LAZY de productos en fabricante se invoca size (Ver tambien Hibernate.initialize)
-			//fabs.forEach(f-> f.getProductos().size());
 			return fabs;
 		});
 	}
 
 	List<Producto> findAllProds() {
-		return transactionTemplate.execute(status -> {
 			var prods = prodRepo.findAll();
-			//Si no utilizas fetch EAGER debes inicializar la colección LAZY en la transaccion:
-			//Para inicializar la coleccion LAZY de productos en fabricante se invoca size (Ver tambien Hibernate.initialize)
-			//prods.forEach(p->p.getFabricante().getProductos().size());
 			return prods;
 		});
 	}
