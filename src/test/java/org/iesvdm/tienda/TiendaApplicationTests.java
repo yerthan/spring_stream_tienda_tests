@@ -23,19 +23,9 @@ class TiendaApplicationTests {
 	@Autowired
 	TransactionTemplate transactionTemplate;
 
-	List<Fabricante> findAllFabs() {
-			var fabs = fabRepo.findAll();
-			return fabs;
-	}
-
-	List<Producto> findAllProds() {
-			var prods = prodRepo.findAll();
-			return prods;
-	}
-
 	@Test
 	void testAllFabricante() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		
 		listFabs.forEach(f -> {
 			System.out.println(">>"+f+ ":");
@@ -45,7 +35,7 @@ class TiendaApplicationTests {
 	
 	@Test
 	void testAllProducto() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 
 		listProds.forEach( p -> {
 			System.out.println(">>"+p+":"+"\nProductos mismo fabricante "+ p.getFabricante());
@@ -60,7 +50,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test1() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -70,7 +60,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test2() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -79,7 +69,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test3() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -88,7 +78,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test4() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -97,7 +87,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test5() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO		
 	}
 	
@@ -106,7 +96,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test6() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -115,7 +105,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test7() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -124,7 +114,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test8() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -133,7 +123,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test9() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO		
 	}
 	
@@ -142,7 +132,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test10() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -151,7 +141,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test11() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -161,7 +151,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test12() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -170,7 +160,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test13() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -179,7 +169,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test14() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -188,7 +178,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test15() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -197,7 +187,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test16() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -206,7 +196,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test17() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -215,7 +205,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test18() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -225,7 +215,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test19() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODOS
 	}
 	
@@ -234,7 +224,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test20() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -243,7 +233,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test21() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -252,7 +242,7 @@ class TiendaApplicationTests {
 	 * Ordene el resultado en primer lugar por el precio (en orden descendente) y en segundo lugar por el nombre (en orden ascendente).
 	 */
 	void test22() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -262,7 +252,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test23() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -271,7 +261,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test24() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -280,7 +270,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test25() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO	
 	}
 	
@@ -289,7 +279,7 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test26() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -309,7 +299,7 @@ Monitor 27 LED Full HD |199.25190000000003|Asus
 	 */		
 	@Test
 	void test27() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -369,7 +359,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test28() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -378,7 +368,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test29() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -387,7 +377,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test30() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 
@@ -397,7 +387,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test31() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -406,7 +396,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test32() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -415,7 +405,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test33() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -424,7 +414,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test34() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO	
 	}
 	
@@ -433,7 +423,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test35() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO		
 	}
 	
@@ -442,7 +432,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test36() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -453,7 +443,7 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test37() {
-		var listProds = findAllProds();
+		var listProds = prodRepo.findAll();
 		//TODO
 	}
 	
@@ -479,7 +469,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test38() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -490,7 +480,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test39() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -500,7 +490,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test40() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -509,7 +499,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test41() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -519,7 +509,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test42() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -528,7 +518,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test43() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -538,7 +528,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test44() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO	
 	}
 	
@@ -549,7 +539,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test45() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 	
@@ -559,7 +549,7 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test46() {
-		var listFabs = findAllFabs();
+		var listFabs = fabRepo.findAll();
 		//TODO
 	}
 
