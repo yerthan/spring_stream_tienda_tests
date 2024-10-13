@@ -1,12 +1,15 @@
 package org.iesvdm.tienda;
 
-
+import org.iesvdm.tienda.modelo.Fabricante;
+import org.iesvdm.tienda.modelo.Producto;
 import org.iesvdm.tienda.repository.FabricanteRepository;
 import org.iesvdm.tienda.repository.ProductoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.support.TransactionTemplate;
+import java.util.List;
+
 
 @SpringBootTest
 class TiendaApplicationTests {
@@ -20,27 +23,30 @@ class TiendaApplicationTests {
 	@Autowired
 	TransactionTemplate transactionTemplate;
 
+	List<Fabricante> findAllFabs() {
+		return transactionTemplate.execute(status -> {
+			return fabRepo.findAll().stream().toList();
+		});
+	}
+
+	List<Producto> findAllProds() {
+		return transactionTemplate.execute(status -> {
+			return prodRepo.findAll().stream().toList();
+		});
+	}
+
 	@Test
 	void testAllFabricante() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			
-			listFabs.forEach(System.out::println);
-
+		var listFabs = findAllFabs();
 		
-			return null;
-		});
+		listFabs.forEach(System.out::println);
 	}
 	
 	@Test
 	void testAllProducto() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
+		var listProds = findAllProds();
 
-			listProds.forEach(System.out::println);
-
-			return null;
-		});
+		listProds.forEach(System.out::println);		
 	}
 	
 	/**
@@ -48,13 +54,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test1() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			
-			//TODO
-
-			return null;
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	
@@ -63,12 +64,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test2() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -76,13 +73,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test3() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-		 	
-			//TODO
-		
-			return null;
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -90,13 +82,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test4() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-		
-			//TODO
-		
-			return null;
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -104,13 +91,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test5() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-		 	
-			//TODO
-		
-			return null;			
-		});		
+		var listFabs = findAllFabs();
+		//TODO		
 	}
 	
 	/**
@@ -118,12 +100,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test6() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;						
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -131,12 +109,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test7() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -144,12 +118,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test8() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -157,12 +127,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test9() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});		
+		var listFabs = findAllFabs();
+		//TODO		
 	}
 	
 	/**
@@ -170,12 +136,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test10() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -183,12 +145,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test11() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -197,12 +155,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test12() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -210,12 +164,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test13() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -223,12 +173,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test14() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -236,12 +182,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test15() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -249,12 +191,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test16() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -262,12 +200,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test17() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -275,12 +209,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test18() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	
@@ -289,12 +219,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test19() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -302,12 +228,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test20() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -315,12 +237,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test21() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -328,12 +246,8 @@ class TiendaApplicationTests {
 	 * Ordene el resultado en primer lugar por el precio (en orden descendente) y en segundo lugar por el nombre (en orden ascendente).
 	 */
 	void test22() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -342,12 +256,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test23() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -355,12 +265,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test24() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -368,12 +274,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test25() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});	
+		var listProds = findAllProds();
+		//TODO	
 	}
 	
 	/**
@@ -381,12 +283,8 @@ class TiendaApplicationTests {
 	 */
 	@Test
 	void test26() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -405,12 +303,8 @@ Monitor 27 LED Full HD |199.25190000000003|Asus
 	 */		
 	@Test
 	void test27() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -469,12 +363,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test28() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -482,12 +372,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test29() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -495,12 +381,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test30() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 
 	
@@ -509,12 +391,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test31() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -522,12 +400,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test32() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -535,12 +409,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test33() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -548,12 +418,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test34() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});	
+		var listProds = findAllProds();
+		//TODO	
 	}
 	
 	/**
@@ -561,12 +427,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test35() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});		
+		var listProds = findAllProds();
+		//TODO		
 	}
 	
 	/**
@@ -574,12 +436,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test36() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	
@@ -589,12 +447,8 @@ Fabricante: Xiaomi
 	 */
 	@Test
 	void test37() {
-		transactionTemplate.execute(status -> {
-			var listProds = prodRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listProds = findAllProds();
+		//TODO
 	}
 	
 	/**
@@ -619,12 +473,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test38() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;						
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -634,12 +484,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test39() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -648,12 +494,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test40() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -661,12 +503,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test41() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -675,12 +513,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test42() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -688,12 +522,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test43() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -702,12 +532,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test44() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});	
+		var listFabs = findAllFabs();
+		//TODO	
 	}
 	
 	/**
@@ -717,12 +543,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test45() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;			
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 	
 	/**
@@ -731,12 +553,8 @@ Hewlett-Packard              2
 	 */
 	@Test
 	void test46() {
-		transactionTemplate.execute(status -> {
-			var listFabs = fabRepo.findAll();
-			//TODO
-		
-			return null;
-		});
+		var listFabs = findAllFabs();
+		//TODO
 	}
 
 }
