@@ -26,28 +26,34 @@ class TiendaApplicationTests {
 	List<Fabricante> findAllFabs() {
 			var fabs = fabRepo.findAll();
 			return fabs;
-		});
 	}
 
 	List<Producto> findAllProds() {
 			var prods = prodRepo.findAll();
 			return prods;
-		});
 	}
 
 	@Test
 	void testAllFabricante() {
 		var listFabs = findAllFabs();
 		
-		listFabs.forEach(System.out::println);
+		listFabs.forEach(f -> {
+			System.out.println(">>"+f+ ":");
+			f.getProductos().forEach(System.out::println);
+		});
 	}
 	
 	@Test
 	void testAllProducto() {
 		var listProds = findAllProds();
 
-		listProds.forEach(System.out::println);		
+		listProds.forEach( p -> {
+			System.out.println(">>"+p+":"+"\nProductos mismo fabricante "+ p.getFabricante());
+			p.getFabricante().getProductos().forEach(pF -> System.out.println(">>>>"+pF));
+		});
+				
 	}
+
 	
 	/**
 	 * 1. Lista los nombres y los precios de todos los productos de la tabla producto
