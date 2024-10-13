@@ -20,9 +20,6 @@ class TiendaApplicationTests {
 	@Autowired
 	ProductoRepository prodRepo;
 
-	@Autowired
-	TransactionTemplate transactionTemplate;
-
 	@Test
 	void testAllFabricante() {
 		var listFabs = fabRepo.findAll();
