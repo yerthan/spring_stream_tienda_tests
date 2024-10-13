@@ -25,13 +25,17 @@ class TiendaApplicationTests {
 
 	List<Fabricante> findAllFabs() {
 		return transactionTemplate.execute(status -> {
-			return fabRepo.findAll().stream().toList();
+			var fabsLazy = fabRepo.findAll();
+			var fabs = fabsLazy.stream().toList();
+			return fabs;
 		});
 	}
 
 	List<Producto> findAllProds() {
 		return transactionTemplate.execute(status -> {
-			return prodRepo.findAll().stream().toList();
+			var prodsLazy = prodRepo.findAll();
+			var prods =  prodsLazy.stream().toList();
+			return prods;
 		});
 	}
 
