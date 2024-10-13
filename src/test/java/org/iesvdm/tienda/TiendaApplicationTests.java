@@ -25,16 +25,20 @@ class TiendaApplicationTests {
 
 	List<Fabricante> findAllFabs() {
 		return transactionTemplate.execute(status -> {
-			var fabsLazy = fabRepo.findAll();
-			var fabs = fabsLazy.stream().toList();
+			var fabs = fabRepo.findAll();
+			//Si no utilizas fetch EAGER debes inicializar la colección LAZY en la transaccion:
+			//Para inicializar la coleccion LAZY de productos en fabricante se invoca size (Ver tambien Hibernate.initialize)
+			//fabs.forEach(f-> f.getProductos().size());
 			return fabs;
 		});
 	}
 
 	List<Producto> findAllProds() {
 		return transactionTemplate.execute(status -> {
-			var prodsLazy = prodRepo.findAll();
-			var prods =  prodsLazy.stream().toList();
+			var prods = prodRepo.findAll();
+			//Si no utilizas fetch EAGER debes inicializar la colección LAZY en la transaccion:
+			//Para inicializar la coleccion LAZY de productos en fabricante se invoca size (Ver tambien Hibernate.initialize)
+			//prods.forEach(p->p.getFabricante().getProductos().size());
 			return prods;
 		});
 	}
@@ -224,7 +228,7 @@ class TiendaApplicationTests {
 	@Test
 	void test19() {
 		var listFabs = findAllFabs();
-		//TODO
+		//TODOS
 	}
 	
 	/**
