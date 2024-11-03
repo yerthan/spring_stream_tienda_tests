@@ -776,7 +776,12 @@ class TiendaApplicationTests {
 		//TODO
 
 		var media = listProds.stream()
-				.filter(p-> p.getFabricante().getNombre().equals("Asus"));
+				.filter(producto -> "Asus".equals(producto.getFabricante().getNombre()))
+				.mapToDouble(producto -> producto.getPrecio())
+				.sum();
+
+		System.out.println(media);
+
 
 
 
