@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.FilterOutputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
@@ -30,7 +31,7 @@ class TiendaApplicationTests {
 		var listFabs = fabRepo.findAll();
 
 		listFabs.forEach(f -> {
-			System.out.println(">>"+f+ ":");
+			System.out.println(">>" + f + ":");
 			f.getProductos().forEach(System.out::println);
 		});
 	}
@@ -39,9 +40,9 @@ class TiendaApplicationTests {
 	void testAllProducto() {
 		var listProds = prodRepo.findAll();
 
-		listProds.forEach( p -> {
-			System.out.println(">>"+p+":"+"\nProductos mismo fabricante "+ p.getFabricante());
-			p.getFabricante().getProductos().forEach(pF -> System.out.println(">>>>"+pF));
+		listProds.forEach(p -> {
+			System.out.println(">>" + p + ":" + "\nProductos mismo fabricante " + p.getFabricante());
+			p.getFabricante().getProductos().forEach(pF -> System.out.println(">>>>" + pF));
 		});
 
 	}
@@ -54,10 +55,10 @@ class TiendaApplicationTests {
 	void test1() {
 		var listProds = prodRepo.findAll();
 		//TODO
-		
+
 		listProds.stream().forEach(System.out::println);
 
-		listProds.stream().forEach(x ->  System.out.println("Nombre: "+x.getNombre() + " precio " + x.getPrecio()	));
+		listProds.stream().forEach(x -> System.out.println("Nombre: " + x.getNombre() + " precio " + x.getPrecio()));
 
 
 	}
@@ -84,7 +85,7 @@ class TiendaApplicationTests {
 		var listProds = prodRepo.findAll();
 		//TODO
 
-		 listProds.stream().forEach(producto -> System.out.println(producto.getNombre().toUpperCase() + " " + producto.getPrecio()));
+		listProds.stream().forEach(producto -> System.out.println(producto.getNombre().toUpperCase() + " " + producto.getPrecio()));
 
 	}
 
@@ -96,13 +97,14 @@ class TiendaApplicationTests {
 		var listFabs = fabRepo.findAll();
 		//TODO
 
-		record ayuda (String nombre, String inicial){}
+		record ayuda(String nombre, String inicial) {
+		}
 
 		var result = listFabs.stream()
 				.map(fabricante ->
 						new ayuda(fabricante.getNombre(),
-						fabricante.getNombre().substring(0,2).toUpperCase()))
-						.toList();
+								fabricante.getNombre().substring(0, 2).toUpperCase()))
+				.toList();
 
 		System.out.println(result);
 		result.forEach(ayuda -> System.out.println("nombre " + ayuda.nombre() + " inicial " + ayuda.inicial()));
@@ -216,7 +218,7 @@ class TiendaApplicationTests {
 
 		var lista2 = listProds.stream()
 				.sorted(comparing(Producto::getPrecio))
-						.limit(1)
+				.limit(1)
 				.toList();
 
 		lista2.forEach(Producto -> System.out.println(Producto.getNombre() + " Precio : " + Producto.getPrecio()));
@@ -250,10 +252,8 @@ class TiendaApplicationTests {
 	}
 
 
-
 	/**
 	 * 12. Lista el nombre de todos los productos del fabricante cuyo código de fabricante es igual a 2.
-	 *
 	 */
 	@Test
 	void test12() {
@@ -284,8 +284,7 @@ class TiendaApplicationTests {
 	 * 14. Lista los productos que tienen un precio mayor o igual a 400€.
 	 */
 	@Test
-	void test14()
-	{
+	void test14() {
 		var listProds = prodRepo.findAll();
 		//TODO
 
@@ -452,7 +451,7 @@ class TiendaApplicationTests {
 
 		var list = listProds.stream()
 				.filter(producto -> producto.getNombre().contains("Monitor")
-				&& producto.getPrecio() <= 215)
+						&& producto.getPrecio() <= 215)
 				.toList();
 
 		list.forEach(System.out::println);
@@ -575,14 +574,13 @@ class TiendaApplicationTests {
 	 * Ordene el resultado en primer lugar por el precio (en orden descendente) y en segundo lugar por el nombre.
 	 * El listado debe mostrarse en formato tabla. Para ello, procesa las longitudes máximas de los diferentes campos a presentar y compensa mediante la inclusión de espacios en blanco.
 	 * La salida debe quedar tabulada como sigue:
-
-	 Producto                Precio             Fabricante
-	 -----------------------------------------------------
-	 GeForce GTX 1080 Xtreme|611.5500000000001 |Crucial
-	 Portátil Yoga 520      |452.79            |Lenovo
-	 Portátil Ideapd 320    |359.64000000000004|Lenovo
-	 Monitor 27 LED Full HD |199.25190000000003|Asus
-
+	 * <p>
+	 * Producto                Precio             Fabricante
+	 * -----------------------------------------------------
+	 * GeForce GTX 1080 Xtreme|611.5500000000001 |Crucial
+	 * Portátil Yoga 520      |452.79            |Lenovo
+	 * Portátil Ideapd 320    |359.64000000000004|Lenovo
+	 * Monitor 27 LED Full HD |199.25190000000003|Asus
 	 */
 	@Test
 	void test27() {
@@ -606,59 +604,68 @@ class TiendaApplicationTests {
 	 * El listado deberá mostrar también aquellos fabricantes que no tienen productos asociados.
 	 * SÓLO SE PUEDEN UTILIZAR STREAM, NO PUEDE HABER BUCLES
 	 * La salida debe queda como sigue:
-	 Fabricante: Asus
-
-	 Productos:
-	 Monitor 27 LED Full HD
-	 Monitor 24 LED Full HD
-
-	 Fabricante: Lenovo
-
-	 Productos:
-	 Portátil Ideapd 320
-	 Portátil Yoga 520
-
-	 Fabricante: Hewlett-Packard
-
-	 Productos:
-	 Impresora HP Deskjet 3720
-	 Impresora HP Laserjet Pro M26nw
-
-	 Fabricante: Samsung
-
-	 Productos:
-	 Disco SSD 1 TB
-
-	 Fabricante: Seagate
-
-	 Productos:
-	 Disco duro SATA3 1TB
-
-	 Fabricante: Crucial
-
-	 Productos:
-	 GeForce GTX 1080 Xtreme
-	 Memoria RAM DDR4 8GB
-
-	 Fabricante: Gigabyte
-
-	 Productos:
-	 GeForce GTX 1050Ti
-
-	 Fabricante: Huawei
-
-	 Productos:
-
-
-	 Fabricante: Xiaomi
-
-	 Productos:
-
+	 * Fabricante: Asus
+	 * <p>
+	 * Productos:
+	 * Monitor 27 LED Full HD
+	 * Monitor 24 LED Full HD
+	 * <p>
+	 * Fabricante: Lenovo
+	 * <p>
+	 * Productos:
+	 * Portátil Ideapd 320
+	 * Portátil Yoga 520
+	 * <p>
+	 * Fabricante: Hewlett-Packard
+	 * <p>
+	 * Productos:
+	 * Impresora HP Deskjet 3720
+	 * Impresora HP Laserjet Pro M26nw
+	 * <p>
+	 * Fabricante: Samsung
+	 * <p>
+	 * Productos:
+	 * Disco SSD 1 TB
+	 * <p>
+	 * Fabricante: Seagate
+	 * <p>
+	 * Productos:
+	 * Disco duro SATA3 1TB
+	 * <p>
+	 * Fabricante: Crucial
+	 * <p>
+	 * Productos:
+	 * GeForce GTX 1080 Xtreme
+	 * Memoria RAM DDR4 8GB
+	 * <p>
+	 * Fabricante: Gigabyte
+	 * <p>
+	 * Productos:
+	 * GeForce GTX 1050Ti
+	 * <p>
+	 * Fabricante: Huawei
+	 * <p>
+	 * Productos:
+	 * <p>
+	 * <p>
+	 * Fabricante: Xiaomi
+	 * <p>
+	 * Productos:
 	 */
 	@Test
 	void test28() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+
+		var lista = listFabs.stream()
+				.map(f -> f.getNombre() + f.getCodigo() +
+						f.getProductos()
+								.stream().map(p -> p.getNombre() + p.getPrecio())
+								.collect(Collectors.joining()))
+				.toList();
+
+		lista.forEach(System.out::println);
+
 
 		/*var result = listFabs.stream()*/
 	}
@@ -730,7 +737,7 @@ class TiendaApplicationTests {
 
 		var precio = listProds.stream()
 				.mapToDouble((Producto::getPrecio))
-						.min();
+				.min();
 
 
 		System.out.println(precio);
@@ -782,20 +789,38 @@ class TiendaApplicationTests {
 
 		System.out.println(media);
 
-
-
-
 	}
 
 
 	/**
 	 * 37. Muestra el precio máximo, precio mínimo, precio medio y el número total de productos que tiene el fabricante Crucial.
-	 *  Realízalo en 1 solo stream principal. Utiliza reduce con Double[] como "acumulador".
+	 * Realízalo en 1 solo stream principal. Utiliza reduce con Double[] como "acumulador".
 	 */
 	@Test
 	void test37() {
 		var listProds = prodRepo.findAll();
 		//TODO
+
+		/*var lista = listProds.stream().filter(producto -> "Crucial".equals(producto.getFabricante().getNombre()))
+				.mapToDouble(producto -> producto.getPrecio()).summaryStatistics();*/
+
+		/*System.out.println(lista);*/
+
+		var result = listProds.stream()
+				.filter(producto -> producto.getFabricante()
+						.getNombre().equalsIgnoreCase("Crucial"))
+				.map(producto -> new Double[]{
+						producto.getPrecio(), producto.getPrecio(), producto.getPrecio(), 0.0})
+				.reduce((doubles, doubles2) -> new Double[]{
+						Math.min(doubles[0], doubles2[0]),
+						Math.max(doubles[0], doubles2[0]),
+						doubles[2] + doubles2[2],
+						doubles[3]++})
+				.orElse(new Double[]{});
+
+		double media = result[3] > 0 ? result[2] / result[3] : 0.0;
+		System.out.println("Valor min " + result[0]);
+		System.out.println("Valor max " + result[1]);
 	}
 
 	/**
@@ -833,6 +858,10 @@ class TiendaApplicationTests {
 	void test39() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+
+
+		listFabs.stream()
+				.forEach();
 	}
 
 	/**
@@ -843,6 +872,13 @@ class TiendaApplicationTests {
 	void test40() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+
+		var lista = listFabs.stream()
+				.map(fabricante -> fabricante.getProductos().stream()
+						.mapToDouble(Producto::getPrecio).average()).filter(n -> n.isPresent() && n.getAsDouble() > 200);
+
+
+		lista.forEach(System.out::println);
 	}
 
 	/**
@@ -852,7 +888,12 @@ class TiendaApplicationTests {
 	void test41() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+
+		listFabs.stream()
+				.filter(fabricante ->  fabricante.getProductos().stream()
+						.mapToDouble()).toList();
 	}
+
 
 	/**
 	 * 42. Devuelve un listado con los nombres de los fabricantes y el número de productos que tiene cada uno con un precio superior o igual a 220 €.
@@ -862,6 +903,11 @@ class TiendaApplicationTests {
 	void test42() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+/*
+		listFabs.stream()
+				.filter(f -> f.)
+
+*/
 	}
 
 	/**
@@ -902,6 +948,10 @@ class TiendaApplicationTests {
 	void test46() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+
+
 	}
 
 }
+
+

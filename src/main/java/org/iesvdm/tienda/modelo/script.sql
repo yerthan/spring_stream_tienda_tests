@@ -39,6 +39,36 @@ INSERT INTO producto VALUES(11, 'Impresora HP Laserjet Pro M26nw', 180, 3);
 
 
 use tienda;
+
+
+-- 1Lista los nombres y los precios de todos los productos de la tabla producto
+
+    select p.nombre, p.precio from producto as p;
+
+-- 2 Devuelve una lista de Producto completa con el precio de euros convertido a dólares .
+
+    select * from producto where producto.precio * 1.1;
+
+-- 3 Lista los nombres y los precios de todos los productos, convirtiendo los nombres a mayúscula
+
+    select UPPER(producto.nombre) as nombre_Producto, producto.precio from producto ;
+
+-- 4  Lista el nombre de todos los fabricantes y a continuación en mayúsculas los dos primeros caracteres del nombre del fabricante.
+
+SELECT
+    CONCAT(UPPER(SUBSTRING(fabricante.nombre, 1, 2)), LOWER(SUBSTRING(fabricante.nombre, 3))) AS nombre_formateado
+FROM
+    fabricante;
+
+-- 5 Lista el código de los fabricantes que tienen productos.
+
+    select fabricante.codigo from fabricante join fabricante on producto.
+
+
+
+
+
+
 /*
 -- 18
 select p.nombre, p.precio*100 from producto as p;
@@ -51,3 +81,10 @@ SELECT * from fabricante where nombre like '%Port?til%';*/
 
 
 select p.nombre, p.precio FROM producto AS p WHERE p.precio >= 180 ORDER BY precio DESC, nombre asc;
+
+
+
+
+-- Ejercicio 29
+
+Select f.* from fabricante as f where f.codigo not in (SELECT producto.codigo_fabricante from producto);
