@@ -207,3 +207,40 @@ producto.codigo_fabricante = fabricante.codigo group by fabricante.codigo;
 
 /* 39 */
 
+/* 40 */
+
+/* 41 */
+select f.nombre from fabricante f join producto p on
+f.codigo = p.codigo_fabricante
+group by f.codigo, f.nombre having count(p.codigo) >= 2;
+
+/* 42 */
+select f.nombre, count(p.codigo_fabricante) as numProd from fabricante f join producto p on
+f.codigo = p.codigo_fabricante where p.precio >= 220
+group by f.nombre order by numProd desc;
+
+/* 43 */
+select f.nombre from fabricante f join producto p on
+f.codigo = p.codigo_fabricante
+group by f.nombre having sum(p.precio) > 1000;
+
+/* 44 */
+
+select f.nombre from fabricante f join producto p on
+f.codigo = p.codigo_fabricante
+group by f.nombre having sum(p.precio) > 1000 order by sum(p.precio) asc;
+
+/* 45 */
+select p.nombre, p.precio, f.nombre from producto p join fabricante f on
+p.codigo_fabricante = f.codigo
+where p.precio = (select max(precio) from producto
+where codigo_fabricante = f.codigo) order by f.nombre asc;
+
+/* 46 */
+select p.nombre, p.precio, f.nombre from producto p join fabricante f on
+p.codigo_fabricante = f.codigo where
+p.precio >= (select avg(precio) from producto
+where codigo_fabricante = f.codigo) order by f.nombre asc, p.precio desc;
+
+
+
