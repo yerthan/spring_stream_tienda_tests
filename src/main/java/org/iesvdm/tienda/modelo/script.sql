@@ -62,7 +62,7 @@ FROM
 
 -- 5 Lista el código de los fabricantes que tienen productos.
 
-    select fabricante.codigo from fabricante join fabricante on producto.
+select fabricante.codigo from fabricante join fabricante on producto.codigo_fabricante = fabricante.codigo where producto.codigo_fabricante LIKE fabricante.codigo;
 
 
 
