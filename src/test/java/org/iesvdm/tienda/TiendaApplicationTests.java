@@ -13,8 +13,7 @@ import java.io.FilterOutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.Comparator.comparing;
-import static java.util.Comparator.reverseOrder;
+import static java.util.Comparator.*;
 
 
 @SpringBootTest
@@ -57,9 +56,13 @@ class TiendaApplicationTests {
 		//TODO
 
 		listProds.stream().forEach(System.out::println);
-
+		var lista = listProds.stream().count();
 		listProds.stream().forEach(x -> System.out.println("Nombre: " + x.getNombre() + " precio " + x.getPrecio()));
 
+
+
+
+		Assertions.assertEquals(11, lista);
 
 	}
 
@@ -75,6 +78,8 @@ class TiendaApplicationTests {
 		listProds.stream().forEach(producto -> producto.setPrecio(producto.getPrecio() * 1.1));
 		listProds.forEach(System.out::println);
 
+
+
 	}
 
 	/**
@@ -86,6 +91,8 @@ class TiendaApplicationTests {
 		//TODO
 
 		listProds.stream().forEach(producto -> System.out.println(producto.getNombre().toUpperCase() + " " + producto.getPrecio()));
+
+		Assertions.assertEquals(11, listProds.size());
 
 	}
 
@@ -110,6 +117,7 @@ class TiendaApplicationTests {
 		result.forEach(ayuda -> System.out.println("nombre " + ayuda.nombre() + " inicial " + ayuda.inicial()));
 
 
+		Assertions.assertEquals(9, result.size());
 	}
 
 	/**
@@ -120,8 +128,10 @@ class TiendaApplicationTests {
 		var listFabs = fabRepo.findAll();
 		//TODO
 
-		listFabs.stream().filter(fabricante -> !fabricante.getProductos().isEmpty()).toList();
-		System.out.println(listFabs);
+		var lista = listFabs.stream().filter(fabricante -> !fabricante.getProductos().isEmpty()).toList();
+		System.out.println(lista);
+
+		Assertions.assertEquals(7, lista.size() );
 
 	}
 
@@ -135,6 +145,8 @@ class TiendaApplicationTests {
 
 		var result = listFabs.stream().sorted(comparing(Fabricante::getNombre).reversed()).toList();
 		System.out.println(result);
+
+		Assertions.assertEquals(9, result.size());
 
 
 		/*var result = listFabs.stream().sorted((f1, f2) ->  f2.getNombre().compareTo(f1.getNombre())).toList();
@@ -156,6 +168,8 @@ class TiendaApplicationTests {
 
 		listProds.stream().sorted(comparing(Producto::getNombre).thenComparing(Producto::getPrecio)).toList();
 		System.out.println(listProds);
+
+		Assertions.assertEquals(11, listProds.size());
 
 /*
 		var result =  listProds.stream().sorted(comparing(Producto::getNombre).thenComparing(Producto::getPrecio, reverseOrder()))
@@ -203,9 +217,9 @@ class TiendaApplicationTests {
 
 		/*
 		var l = listFabs.stream().skip(3).limit(2).toList();
-		System.out.println(l);
+		System.out.println(l);*/
 
-		Assertions.assertEquals(l.get(0).getNombre() , "Samsung");*/
+		Assertions.assertEquals(lista.get(0).getNombre() , "Samsung");
 	}
 
 	/**
@@ -249,6 +263,8 @@ class TiendaApplicationTests {
 				.toList();
 
 		lista.forEach(System.out::println);
+
+		Assertions.assertTrue(lista.size() == 1);
 	}
 
 
@@ -263,6 +279,8 @@ class TiendaApplicationTests {
 		var lista = listProds.stream().filter(producto -> producto.getFabricante().getCodigo() == 2).toList();
 
 		lista.forEach(System.out::println);
+		Assertions.assertEquals(2, lista.size());
+
 
 
 	}
@@ -278,6 +296,8 @@ class TiendaApplicationTests {
 
 		var lista2 = listProds.stream().filter(producto -> producto.getPrecio() <= 120).toList();
 		lista2.forEach(System.out::println);
+
+		Assertions.assertTrue(lista2.size() == 3);
 	}
 
 	/**
@@ -293,6 +313,8 @@ class TiendaApplicationTests {
 				.toList();
 
 		l.forEach(System.out::println);
+
+		Assertions.assertEquals(3, l.size());
 
 		/*
 		List<Producto> lista =listProds.stream().filter(producto -> producto.getPrecio() >= 400).toList();
@@ -315,6 +337,7 @@ class TiendaApplicationTests {
 				.toList();
 
 		list.forEach(System.out::println);
+		Assertions.assertEquals(7, list.size());
 		/*
 		List<Producto> lista = listProds.stream().filter(producto -> producto.getPrecio() >= 80 && producto.getPrecio() <= 300).toList();
 		lista.stream().forEach(System.out::println);
@@ -335,6 +358,7 @@ class TiendaApplicationTests {
 						producto.getFabricante().getCodigo() == 6).toList();
 
 		list.forEach(System.out::println);
+		Assertions.assertEquals(1, list.size());
 
 		/*
 		var lista = listProds.stream().filter(producto -> producto.getPrecio() > 200 && producto.getCodigo() == 6).toList();
@@ -363,6 +387,8 @@ class TiendaApplicationTests {
 
 		lista.forEach(System.out::println);
 
+		Assertions.assertEquals(5, lista.size());
+
 
 
 /*
@@ -390,11 +416,20 @@ class TiendaApplicationTests {
 	void test18() {
 		var listProds = prodRepo.findAll();
 		//TODO
-		/*
+/*
 		record tupla(String nombre, double precio) {}
 
 		var result = listProds.parallelStream().map(producto ->new tupla(producto.getNombre(), producto.getPrecio()*100)).toList();
 		result.forEach(System.out::println);
+
+ */
+
+		var result = listProds.stream()
+						.map(p -> p.getNombre() + " " + p.getPrecio() *100)
+								.toList();
+
+
+		Assertions.assertEquals(11, result.size());
 
 
 		/*var lista = listProds.stream().map(producto -> producto.getNombre() + (producto.getPrecio() *100)).toList();*/
@@ -416,7 +451,7 @@ class TiendaApplicationTests {
 				.toList();
 
 		list.forEach(System.out::println);
-
+		Assertions.assertEquals(2, list.size());
 
 
 		/*
@@ -439,6 +474,8 @@ class TiendaApplicationTests {
 				.toList();
 
 		list.forEach(System.out::println);
+
+		Assertions.assertEquals(2, list.size());
 	}
 
 	/**
@@ -455,6 +492,8 @@ class TiendaApplicationTests {
 				.toList();
 
 		list.forEach(System.out::println);
+
+		Assertions.assertEquals(1, list.size());
 
 		/*
 		var lista = prodRepo.findAll().stream()
@@ -481,7 +520,7 @@ class TiendaApplicationTests {
 
 		lista.forEach(System.out::println);
 
-
+		Assertions.assertEquals(7, lista.size());
 
 		/*
 		var lista = prodRepo.findAll().stream()
@@ -509,6 +548,8 @@ class TiendaApplicationTests {
 
 		lista.forEach(System.out::println);
 
+		Assertions.assertEquals(11, lista.size());
+
 
 		/*var listaOrdenada = listProds.stream()
 				.map(producto -> producto)*/
@@ -529,6 +570,8 @@ class TiendaApplicationTests {
 
 
 		lista.forEach(System.out::println);
+
+		Assertions.assertEquals(1, lista.size());
 	}
 
 
@@ -540,7 +583,14 @@ class TiendaApplicationTests {
 		var listProds = prodRepo.findAll();
 		//TODO
 
+		var result = listProds.stream()
+				.filter(p -> p.getFabricante().getNombre()
+						.equalsIgnoreCase("Crucial")
+						&& p.getPrecio() >= 200)
+				.toList();
 
+		result.forEach(System.out::println);
+		Assertions.assertEquals(1, result.size());
 
 		/*
 		var lista = listProds.stream()
@@ -558,10 +608,10 @@ class TiendaApplicationTests {
 		var listProds = prodRepo.findAll();
 		//TODO
 
-		Set<String> lista = Set.of("ASUS", "HEWLET-PACKARD", "SEAGATE");
+		Set<String> lista = Set.of("Asus", "Hewlett-Packard", "Seagate");
 
 		var list = listProds.stream()
-				.filter(producto -> lista.contains(producto.getFabricante().getNombre().toUpperCase()))
+				.filter(producto -> lista.contains(producto.getFabricante().getNombre()))
 				.toList();
 
 		list.forEach(System.out::println);
@@ -587,11 +637,16 @@ class TiendaApplicationTests {
 		var listProds = prodRepo.findAll();
 		//TODO
 
-		var result = listProds.stream().sorted(comparing(Producto::getPrecio, reverseOrder()).thenComparing(Producto::getNombre))
+		var result = listProds.stream().
+				sorted(comparing(Producto::getPrecio, reverseOrder()).thenComparing(Producto::getNombre))
 				.filter(producto -> producto.getPrecio() >= 180)
-				.map(producto -> "Nombre " + producto.getNombre() + " Precio : " + producto.getPrecio() + "Fabricante " + producto.getFabricante().getNombre());
+				.map(producto -> "Nombre " + producto.getNombre() + " Precio : "
+						+ producto.getPrecio() +
+						"Fabricante " + producto.getFabricante().getNombre()).toList();
 
 		result.forEach(System.out::println);
+		Assertions.assertEquals(7, result.size());
+
 
 /*
 		System.out.println("Producto \t" + " Precio \t" + "Farbicante" );
@@ -681,6 +736,7 @@ class TiendaApplicationTests {
 		var result = listFabs.stream().filter(f -> f.getProductos().isEmpty()).toList();
 
 		result.forEach(System.out::println);
+		Assertions.assertEquals(2, result.size());
 	}
 
 	/**
@@ -693,6 +749,7 @@ class TiendaApplicationTests {
 
 		var result = listProds.stream().count();
 		System.out.println("El resultado de producto es " + result);
+		Assertions.assertEquals(11, listProds.size());
 	}
 
 
@@ -705,11 +762,12 @@ class TiendaApplicationTests {
 		//TODO
 
 		var list = listProds.stream()
-				.map(producto -> producto.getFabricante().getNombre())
+				.map(producto -> producto.getFabricante())
 				.distinct()
 				.count();
 
 		System.out.println(list);
+		//Assertions.assertEquals(9, listProds.size());
 	}
 
 	/**
@@ -724,7 +782,9 @@ class TiendaApplicationTests {
 				.mapToDouble(producto -> producto.getPrecio())
 				.average();
 
+
 		System.out.println(list);
+		Assertions.assertEquals(271.7236363636364, list.orElse(0.0));
 	}
 
 	/**
@@ -741,6 +801,7 @@ class TiendaApplicationTests {
 
 
 		System.out.println(precio);
+		Assertions.assertEquals(59.99, precio.orElse(0.0));
 	}
 
 	/**
@@ -757,6 +818,8 @@ class TiendaApplicationTests {
 
 		System.out.println(suma);
 
+		Assertions.assertEquals(2988.96, suma);
+
 	}
 
 	/**
@@ -771,6 +834,7 @@ class TiendaApplicationTests {
 				.filter(producto -> producto.getFabricante().getNombre().equals("Asus")).count();
 
 		System.out.println(num);
+		Assertions.assertEquals(2, num);
 
 	}
 
@@ -785,10 +849,12 @@ class TiendaApplicationTests {
 		var media = listProds.stream()
 				.filter(producto -> "Asus".equals(producto.getFabricante().getNombre()))
 				.mapToDouble(producto -> producto.getPrecio())
-				.sum();
+				.average().orElse(0.0);
+
 
 		System.out.println(media);
 
+		Assertions.assertEquals(223.995, media);
 	}
 
 
@@ -858,10 +924,10 @@ class TiendaApplicationTests {
 	void test39() {
 		var listFabs = fabRepo.findAll();
 		//TODO
-
+/*
 
 		listFabs.stream()
-				.forEach();
+				.forEach();*/
 	}
 
 	/**
@@ -879,6 +945,8 @@ class TiendaApplicationTests {
 
 
 		lista.forEach(System.out::println);
+
+
 	}
 
 	/**
@@ -888,10 +956,13 @@ class TiendaApplicationTests {
 	void test41() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+		var result = listFabs.stream()
+				.filter(f -> f.getProductos().size() >= 2)
+				.map(f -> f.getNombre())
+				.toList();
 
-		listFabs.stream()
-				.filter(fabricante ->  fabricante.getProductos().stream()
-						.mapToDouble()).toList();
+		result.forEach(System.out::println);
+		Assertions.assertEquals(4, result.size());
 	}
 
 
@@ -917,6 +988,13 @@ class TiendaApplicationTests {
 	void test43() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+			var result = listFabs.stream()
+					.filter(f -> f.getProductos().stream().mapToDouble(p -> p.getPrecio()).sum() > 1000)
+					.map(f ->f.getNombre())
+					.toList();
+
+			result.forEach(System.out::println);
+			Assertions.assertEquals(1, result.size());
 	}
 
 	/**
@@ -927,6 +1005,15 @@ class TiendaApplicationTests {
 	void test44() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+
+		var result = listFabs.stream()
+				.sorted(comparingDouble(f -> f.getProductos().stream().mapToDouble(p -> p.getPrecio()).sum()))
+				.filter(f -> f.getProductos().stream().mapToDouble(p -> p.getPrecio()).sum() > 1000)
+				.map(f -> f.getNombre())
+				.toList();
+
+		result.forEach(System.out::println);
+		Assertions.assertEquals(1, result.size());
 	}
 
 	/**
@@ -938,6 +1025,17 @@ class TiendaApplicationTests {
 	void test45() {
 		var listFabs = fabRepo.findAll();
 		//TODO
+		System.out.println("Nombre Producto			Precio 			Fabricante");
+		var result = listFabs.stream()
+				.sorted(comparing(f -> f.getNombre()))
+				.map(f -> f.getProductos().stream()
+						.max(comparingDouble(p -> p.getPrecio()))
+						.map(p -> p.getNombre() + "-" + p.getPrecio() + "-" + f.getNombre())
+						.orElse(null))
+				.toList();
+
+		result.forEach(System.out::println);
+		Assertions.assertTrue(result.isEmpty());
 	}
 
 	/**
@@ -949,6 +1047,18 @@ class TiendaApplicationTests {
 		var listFabs = fabRepo.findAll();
 		//TODO
 
+		var result = listFabs.stream()
+				.sorted(comparing(f -> f.getNombre()))
+				.flatMap(f ->f.getProductos().stream()
+						.filter(p ->p.getPrecio() >= f.getProductos().stream()
+								.mapToDouble(pr -> pr.getPrecio()).average().orElse(0.0)
+						)
+						.sorted(comparing(p -> p.getPrecio(),reverseOrder()))
+						.map(producto -> producto.getNombre() + "-" + producto.getPrecio() + "-" + f.getNombre()))
+				.toList();
+
+		result.forEach(System.out::println);
+		Assertions.assertEquals(7, result.size());
 
 	}
 
