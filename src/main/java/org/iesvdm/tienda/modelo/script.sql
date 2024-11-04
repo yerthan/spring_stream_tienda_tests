@@ -196,3 +196,14 @@ p.codigo_fabricante = f.codigo
 where f.nombre like 'Asus';
 
 /* 37 */
+
+select * from producto join tienda.fabricante on
+producto.codigo_fabricante = fabricante.codigo
+where fabricante.nombre = 'Crucial';
+
+/* 38 */
+select fabricante.nombre, count(*) from fabricante join producto on
+producto.codigo_fabricante = fabricante.codigo group by fabricante.codigo;
+
+/* 39 */
+
