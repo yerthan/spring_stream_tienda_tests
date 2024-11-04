@@ -1059,7 +1059,7 @@ class TiendaApplicationTests {
 
 		result.forEach(System.out::println);
 		Assertions.assertEquals(7, result.size());
-		System.out.println();
+
 
 	}
 
