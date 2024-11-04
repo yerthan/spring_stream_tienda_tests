@@ -62,29 +62,137 @@ FROM
 
 -- 5 Lista el código de los fabricantes que tienen productos.
 
-select fabricante.codigo from fabricante join fabricante on producto.codigo_fabricante = fabricante.codigo where producto.codigo_fabricante LIKE fabricante.codigo;
+SELECT distinct codigo_fabricante from producto;
+
+-- 6 Lista los nombres de los fabricantes ordenados de forma descendente.
+
+    SELECT nombre from fabricante order by nombre desc;
+
+-- 7 Lista los nombres de los productos ordenados en primer lugar por el
+-- nombre de forma ascendente y en segundo lugar por el precio de forma descendente.
+
+SELECT nombre, precio from producto order by nombre asc, precio desc;
+
+-- 8 Devuelve una lista con los 5 primeros fabricantes.
+
+SELECT nombre from fabricante limit 5;
+
+-- 9 Devuelve una lista con 2 fabricantes a partir del cuarto fabricante.
+-- El cuarto fabricante también se debe incluir en la respuesta.
+SELECT nombre from fabricante limit 2 offset 3;
+
+-- 10 Lista el nombre y el precio del producto más barato
+SELECT nombre, precio from producto order by precio asc limit 1;
+
+-- 11Lista el nombre y el precio del producto más caro
+SELECT nombre, precio from producto order by precio desc limit 1;
+
+/* 12 Lista el nombre de todos los productos del fabricante cuyo código de fabricante es igual a 2.*/
+
+    SELECT nombre from producto where codigo_fabricante = 2;
+
+/*13 Lista el nombre de los productos que tienen un precio menor o igual a 120€.*/
+
+    SELECT nombre from producto where precio <= 120;
+
+/*14 Lista los productos que tienen un precio mayor o igual a 400€.*/
+SELECT * from tienda.producto p where p.precio >= 400;
+
+/* 15. Lista todos los productos que tengan un precio entre 80€ y 300€. */
+
+SELECT * from tienda.producto p where p.precio >= 80 and p.precio <= 300;
 
 
+/* 16. Lista todos los productos que tengan un precio mayor que 200€ y que el código de fabricante sea igual a 6.*/
 
 
+   select * from tienda.producto p where p.precio > 200 and codigo_fabricante = 6;
 
+/* 17 Lista todos los productos donde el código de fabricante sea 1, 3 o 5*/
 
-/*
--- 18
+select * from producto where codigo_fabricante in (1, 3, 5);
+
+/*18 Lista el nombre y el precio de los productos en céntimos */
 select p.nombre, p.precio*100 from producto as p;
 
--- 19
+/* 19. Lista los nombres de los fabricantes cuyo nombre empiece por la letra S*/
+
 
 select nombre from fabricante where nombre LIKE 's%';
 
-SELECT * from fabricante where nombre like '%Port?til%';*/
+/*20. Devuelve una lista con los productos que contienen la cadena Portátil en el nombre.*/
+
+SELECT * from fabricante where nombre like '%Port?til%';
+
+/*Devuelve una lista con el nombre de todos los productos que contienen la cadena Monitor en el nombre y tienen un precio inferior a 215 €.*/
+
+select * from producto where producto.nombre like '%_onitor%' and producto.precio < 215;
+
+/* 22 */
+
+select * from producto where producto.precio >= 180 order by precio desc, nombre asc;
+
+/* 23 */
+
+select p.nombre, p.precio, f.nombre from producto
+    as p join fabricante as f on
+    p.codigo_fabricante = f.codigo order by f.nombre asc;
+
+/* 24 */
+    select * from producto order by precio desc limit 1;
+
+/* 25 */
+
+select p.nombre from producto as p join fabricante as f on
+p.codigo_fabricante = f.codigo
+where p.precio > 200 and f.nombre like 'Crucial';
+
+/* 26 */
+select p.* from producto as p join fabricante as f on
+p.codigo_fabricante = f.codigo
+where f.nombre in ('Asus', 'Hewlett-Packard', 'Seagate');
+
+/* 27 */
+
+select p.nombre, p.precio from producto as p join fabricante as f on
+p.codigo_fabricante = f.codigo
+where p.precio >= 100 order by p.precio desc, p.codigo asc;
 
 
-select p.nombre, p.precio FROM producto AS p WHERE p.precio >= 180 ORDER BY precio DESC, nombre asc;
-
-
-
+/* 28 */
+select * from fabricante join producto on
+fabricante.codigo = producto.codigo_fabricante;
 
 -- Ejercicio 29
 
-Select f.* from fabricante as f where f.codigo not in (SELECT producto.codigo_fabricante from producto);
+Select f.* from fabricante as f where f.codigo
+not in (SELECT producto.codigo_fabricante from producto);
+
+/* 30 */
+select count(*) as total_productos from producto;
+
+/* 31 */
+select count(distinct codigo_fabricante) from producto;
+
+/* 32 */
+
+select avg(producto.precio) from producto;
+
+/* 33 */
+
+select min(producto.precio) from producto;
+
+/* 34 */
+select sum(producto.precio) from producto;
+
+/* 35 */
+select count(p.codigo_fabricante) from producto p join tienda.fabricante f on
+f.codigo = p.codigo_fabricante
+where lower(f.nombre) = lower('asus');
+
+/* 36 */
+select avg(p.precio) from producto p join tienda.fabricante f on
+p.codigo_fabricante = f.codigo
+where f.nombre like 'Asus';
+
+/* 37 */
