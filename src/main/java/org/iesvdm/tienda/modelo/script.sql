@@ -234,7 +234,8 @@ group by f.nombre having sum(p.precio) > 1000 order by sum(p.precio) asc;
 select p.nombre, p.precio, f.nombre from producto p join fabricante f on
 p.codigo_fabricante = f.codigo
 where p.precio = (select max(precio) from producto
-where codigo_fabricante = f.codigo) order by f.nombre asc;
+where codigo_fabricante = f.codigo) order by f.nombre asc
+;
 
 /* 46 */
 select p.nombre, p.precio, f.nombre from producto p join fabricante f on
